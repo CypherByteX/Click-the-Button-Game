@@ -1,0 +1,57 @@
+<div id="game">
+    <h1>Click the Button Game</h1>
+    <button id="clickMe">Click Me!</button>
+    <p>Time left: <span id="timeLeft">10</span> seconds</p>
+    <p>Score: <span id="score">0</span></p>
+</div>
+
+//
+
+CSS 
+//
+#game {
+    text-align: center;
+    margin-top: 50px;
+}
+button {
+    padding: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+JS Logic 
+
+let score = 0;
+let timeLeft = 10;
+let gameActive = false;
+
+document.getElementById('clickMe').addEventListener('click', function() {
+    if (gameActive) {
+        score++;
+        document.getElementById('score').innerText = score;
+    }
+});
+
+function startGame() {
+    gameActive = true;
+    score = 0;
+    timeLeft = 10;
+    document.getElementById('score').innerText = score;
+    document.getElementById('timeLeft').innerText = timeLeft;
+
+    const timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timeLeft').innerText = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            gameActive = false;
+            alert('Game Over! Your score is ' + score);
+        }
+    }, 1000);
+}
+
+startGame();
+
+
